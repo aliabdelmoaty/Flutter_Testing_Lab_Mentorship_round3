@@ -1,5 +1,23 @@
 import 'package:flutter/material.dart';
 
+class FormValidators {
+  static bool isValidEmail(String email) {
+    final RegExp emailRegex = RegExp(
+      r'^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$',
+    );
+
+    return emailRegex.hasMatch(email);
+  }
+
+  static bool isValidPassword(String password) {
+    final RegExp passwordRegex = RegExp(
+      r'^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#\$&*~]).{8,}$',
+    );
+
+    return passwordRegex.hasMatch(password);
+  }
+}
+
 class UserRegistrationForm extends StatefulWidget {
   const UserRegistrationForm({super.key});
 
@@ -17,27 +35,21 @@ class _UserRegistrationFormState extends State<UserRegistrationForm> {
   bool _isLoading = false;
   String _message = '';
 
-  bool isValidEmail(String email) {
-    return email.contains('@');
-  }
-
-  bool isValidPassword(String password) {
-    return true;
-  }
-
   Future<void> _submitForm() async {
-    setState(() {
-      _isLoading = true;
-      _message = '';
-    });
+    if (_formKey.currentState!.validate()) {
+      setState(() {
+        _isLoading = true;
+        _message = '';
+      });
 
-    // Simulate API call
-    await Future.delayed(const Duration(seconds: 2));
+      // Simulate API call
+      await Future.delayed(const Duration(seconds: 2));
 
-    setState(() {
-      _isLoading = false;
-      _message = 'Registration successful!';
-    });
+      setState(() {
+        _isLoading = false;
+        _message = 'Registration successful!';
+      });
+    }
   }
 
   @override
@@ -77,7 +89,7 @@ class _UserRegistrationFormState extends State<UserRegistrationForm> {
                 if (value == null || value.isEmpty) {
                   return 'Please enter your email';
                 }
-                if (!isValidEmail(value)) {
+                if (!FormValidators.isValidEmail(value)) {
                   return 'Please enter a valid email';
                 }
                 return null;
@@ -96,7 +108,7 @@ class _UserRegistrationFormState extends State<UserRegistrationForm> {
                 if (value == null || value.isEmpty) {
                   return 'Please enter a password';
                 }
-                if (!isValidPassword(value)) {
+                if (!FormValidators.isValidPassword(value)) {
                   return 'Password is too weak';
                 }
                 return null;
