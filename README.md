@@ -425,24 +425,3 @@ This is a mentorship project, but if you'd like to contribute:
 5. Open a Pull Request
 
 ---
-
-## 📄 License
-
-This project is licensed under the MIT License.
-
----
-
-## 👨‍💻 Author
-
-**Omar Ahmed**  
-Flutter Developer | Mentorship Round 3
-
----
-
-## 🙏 Acknowledgments
-
-- Thanks to the mentorship program for providing this practical testing challenge
-- Flutter team for excellent documentation
-- Community for testing best practices
-
----
